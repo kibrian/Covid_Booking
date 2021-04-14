@@ -10,8 +10,45 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="../css/style.css">
 </head>
+<style>
+  /* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+</style>
 <body>
-<?php include 'connection.php' ?>;
+
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <a class="navbar-brand" href="#"><img src="../images/img.jpg" height="40" width="40" alt=""></a>
@@ -66,61 +103,86 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="mt-5 mb-3 clearfix">
-                        <!-- <h2 class="pull-left"> Dear<?php  echo ($_SESSION['Username']) ($_SESSION['Id_number']) ?> you have a pending appointment</b></h2> -->
+                        <h2 class="pull-left"> Dear
+                        
+                        <?php 
+
+                        if(!empty($Id_number))
+                            echo ($_SESSION['Username']); 
+                         
+
+                          if(!empty($Id_number))
+                              echo($_SESSION['Id_number']) 
+                         
+                         ?>
+                         
+                          you have a pending appointment</b></h2>
                         <!-- <a href="appointments.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New appointment</a> -->
                     </div>
+
+                   
                     <?php
                     // Include config file
                     // require_once "../connection.php";
+       
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM appointments";
-                    if($result = mysqli_query($conn, $sql)){
-                        if(mysqli_num_rows($result) > 0){
-                            echo '<table class="table table-bordered table-striped">';
-                                echo "<thead>";
-                                    echo "<tr>";
-                                        echo "<th>#</th>";
-                                        echo "<th>phoneNo</th>";
-                                        echo "<th>Id_number</th>";
-                                        echo "<th>email</th>";
-                                        echo "<th>date</th>";
-                                        echo "<th>time</th>";
-                                        echo "<th>location</th>";
-                                    echo "</tr>";
-                                echo "</thead>";
-                                echo "<tbody>";
-                                while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['phoneNo'] . "</td>";
-                                        echo "<td>" . $row['Id_number'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td>" . $row['date'] . "</td>";
-                                        echo "<td>" . $row['time'] . "</td>";
-                                        echo "<td>" . $row['location'] . "</td>";
-                                        // echo "<td>";
-                                        //     // echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                        //     // echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                        //     // echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
-                                        // echo "</td>";
-                                    echo "</tr>";
-                                }
-                                echo "</tbody>";                            
-                            echo "</table>";
-                            
-                            // Free result set
-                            mysqli_free_result($result);
+                    $Id_number = '';
+                    if(!empty($_SESSION['Id_number']))
+                      $Id_number=$_SESSION['Id_number'];
+                    if(!empty($Id_number)){
+                      require_once "connection.php" ;
+
+                        $sql = "SELECT * FROM appointments where Id_number= '$Id_number'";
+                        if($result = mysqli_query($conn, $sql)){
+                            if(mysqli_num_rows($result) > 0){
+                                echo '<table class="table table-bordered table-striped">';
+                                    echo "<thead>";
+                                        echo "<tr>";
+                                            echo "<th>#</th>";
+                                            echo "<th>phoneNo</th>";
+                                            echo "<th>Id_number</th>";
+                                            echo "<th>email</th>";
+                                            echo "<th>date</th>";
+                                            echo "<th>time</th>";
+                                            echo "<th>location</th>";
+                                        echo "</tr>";
+                                    echo "</thead>";
+                                    echo "<tbody>";
+                                    while($row = mysqli_fetch_array($result)){
+                                        echo "<tr>";
+                                            echo "<td>" . $row['id'] . "</td>";
+                                            echo "<td>" . $row['phoneNo'] . "</td>";
+                                            echo "<td>" . $row['Id_number'] . "</td>";
+                                            echo "<td>" . $row['email'] . "</td>";
+                                            echo "<td>" . $row['date'] . "</td>";
+                                            echo "<td>" . $row['time'] . "</td>";
+                                            echo "<td>" . $row['location'] . "</td>";
+                                            // echo "<td>";
+                                            //     // echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            //     // echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            //     // echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            // echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    echo "</tbody>";                            
+                                echo "</table>";
+                                
+                                // Free result set
+                                mysqli_free_result($result);
+                            } else{
+                                echo '<div class="alert alert-danger"><em>No pending appointment were found.</em></div>';
+                            }
                         } else{
-                            echo '<div class="alert alert-danger"><em>No pending appointment were found.</em></div>';
+                            echo "Oops! Something went wrong. Please try again later.";
                         }
-                    } else{
-                        echo "Oops! Something went wrong. Please try again later.";
+    
+                        // Close connection
+                        mysqli_close($conn);
                     }
- 
-                    // Close connection
-                    mysqli_close($conn);
+
                     ?>
                 </div>
             </div>        

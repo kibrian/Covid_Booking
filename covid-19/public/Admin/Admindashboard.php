@@ -40,10 +40,10 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <!-- <a class="nav-link" href="index.php">Sign Up</a> -->
+        <a class="nav-link" href="#">LogOut</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./public/dashboard-1.php">HOME</a>
+        <a class="nav-link" href="#">HOME</a>
       </li>
       <li class="nav-item">
         <!-- <a class="nav-link" href="appointments.php">Add-appointment</a> -->
