@@ -1,0 +1,19 @@
+*{
+    font-family: 'Inconsolata', monospace;
+}
+
+.container{
+    margin-top: 70px;
+}
+.login-box{
+    white-space: nowrap;
+}
+body{
+    background-image: url();
+    background-color: skyblue;
+    /* background-position: center;
+    background-size: cover; */
+}
+h1{
+    font-size: bold;
+}
