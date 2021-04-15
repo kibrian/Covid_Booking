@@ -105,10 +105,10 @@
                 <div class="col-md-12">
 
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left"> Dear
-                        
+                        <h2 class="pull-left"> 
+                      Dear <?php echo($_SESSION['Username']); ?>
                         <?php 
-
+// Dear  $_SESSION['Username'];
                         if(!empty($Id_number))
                             echo ($_SESSION['Username']); 
                          
@@ -118,7 +118,7 @@
                          
                          ?>
                          
-                          you have a pending appointment</b></h2>
+                          </b></h2>
                         <!-- <a href="appointments.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New appointment</a> -->
                     </div>
 
